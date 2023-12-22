@@ -1,4 +1,4 @@
-import db
+from Db import db
 import app
 from Db.models import User, Initiative, Vote
 def create_sample_initiatives():
