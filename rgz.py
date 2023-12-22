@@ -48,7 +48,7 @@ def admin_users(page=1):
     users = User.query.all()
     per_page = 20
     
-    initiatives = Initiative.query.order_by(Initiative.date_created).paginate(page=page, per_page=per_page, error_out=False)
+    initiatives = Initiative.query.order_by(Initiative.date_created.desc()).paginate(page=page, per_page=per_page, error_out=False)
 
     return render_template("admin_users.html", users=users, initiatives = initiatives)
 
