@@ -15,4 +15,4 @@ def create_sample_initiatives():
             db.session.commit()
             #print(f"Added {100 - existing_count} new initiatives.")
 
-create_sample_initiatives()
+
