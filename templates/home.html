@@ -15,9 +15,9 @@
         <h2>{{ initiative.title }}</h2>
         <p>{{ initiative.description }}</p>
         <p>Дата создания: {{ initiative.date_created }}</p>
-        <p>Оставь свой голос инициативе:</p> 
         <div style="display: flex;">
         {% if current_user.is_authenticated %}
+        <p>Оставь свой голос инициативе:</p> 
         <form action="{{ url_for('rgz.upvote', initiative_id=initiative.id) }}" method="post">
             <input type="submit" value="За!">
         </form>
