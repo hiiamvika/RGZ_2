@@ -11,7 +11,7 @@ user_db = "KryshevaVD10210"
 host_ip = "KryshevaVD10210.mysql.pythonanywhere-services.com"
 host_port = "3306"
 database_name = "KryshevaVD10210$rgz_base"
-password = "Vika1021026!"
+password = "vika1021026!"
 
 app.config ['SQLALCHEMY_DATABASE_URI'] = f'mysql://{user_db}:{password}@{host_ip}:{host_port}/{database_name}'
 app.config ['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
