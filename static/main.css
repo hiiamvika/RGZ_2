@@ -1,0 +1,36 @@
+body {
+    background-color: rgb(185, 209, 194);
+    color: rgb(37, 7, 142);
+    font-family: Arial; 
+    margin: 0px;
+}
+header {
+    background: rgb(28, 134, 65);
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    font-size: 16pt;
+}
+footer {
+    background:rgb(28, 134, 65);
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    font-size: 16pt;
+    font-style: italic;
+    text-align: right;
+    margin: 0%;
+}
+p {
+    margin: 15px;
+}
+a {
+    margin: 15px;
+    text-decoration: none;
+    color: rgb(246, 215, 41);
+}
+a:hover {
+    text-decoration: none;
+    color: #0900ad;
+}
+main {
+    margin: 10px 20px;
+}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div style="border: 2px;color: rgb(76 73 82);font-size: 17px;padding: 15px;height: min-content;width: 761px;margin: 10px auto;font-weight: bold;text-align: center;">
+Привет, {{ username }}! <br>
+На нашем сайте вы можете оставить инициативу, если вы житель Новосибирска и хотите внести свой вклад в 
+улучшение жизни в нашем городе. Вы можете предложить проекты по благоустройству, общественным мероприятиям, 
+развитию инфраструктуры и многое другое. Ваше мнение важно для нас, и мы готовы рассмотреть все предложения 
+и инициативы, которые могут сделать наш город лучше. Наша цель - создать комфортное и благоприятное 
+пространство для всех жителей Новосибирска, и мы рады приветствовать ваши идеи и предложения.
+</div>
+
+{% for initiative in initiatives.items %}
+    <div style="border: 2px solid;border-radius: 8px; background-color: rgb(253, 253, 253); color: rgb(32, 19, 61);border-color: rgb(2, 108, 39);font-size: 17px;padding: 15px;height: min-content;width: 821px;margin: 10px auto;font-weight: bold;">
+        <h2>{{ initiative.title }}</h2>
+        <p>{{ initiative.description }}</p>
+        <p>Дата создания: {{ initiative.date_created }}</p>
+        <p>Оставь свой голос инициативе:</p> 
+        <div style="display: flex;">
+        {% if current_user.is_authenticated %}
+        <form action="{{ url_for('rgz.upvote', initiative_id=initiative.id) }}" method="post">
+            <input type="submit" value="За!">
+        </form>
+        <form action="{{ url_for('rgz.downvote', initiative_id=initiative.id) }}" method="post">
+            <input type="submit" value="Против!">
+        </form>
+        {% endif %}
+        </div>
+        <p>Голоса: {{ initiative.score }}</p>
+        {% if current_user.is_authenticated and initiative.user_id == current_user.id %}
+            <form action="{{ url_for('rgz.delete_initiative', initiative_id=initiative.id) }}" method="post">
+                <input type="submit" value="Удалить свою инициативу">
+            </form>
+        {% endif %}
+    </div>
+{% endfor %}
+
+<div style="text-align: center; font-size: large;">
+    {% if initiatives.has_prev %}
+        <a href="{{ url_for('rgz.home', page=initiatives.prev_num) }}">Назад</a>
+    {% endif %}
+    <span>Страница {{ initiatives.page }} из {{ initiatives.pages }}</span>
+    {% if initiatives.has_next %}
+        <a href="{{ url_for('rgz.home', page=initiatives.next_num) }}">Вперед</a>
+    {% endif %}
+</div>
+{% endblock %}

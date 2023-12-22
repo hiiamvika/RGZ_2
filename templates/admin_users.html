@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block main %}
+{% if current_user.is_authenticated and current_user.is_admin %}
+<h1 style="text-align: center;">Пользователи:</h1>
+    {% for user in users %}
+    <div style="border: 2px solid;border-radius: 8px; background-color: rgb(253, 253, 253); color: rgb(32, 19, 61);border-color: rgb(2, 108, 39);font-size: 17px;padding: 15px;height: min-content;width: 821px;margin: 10px auto;font-weight: bold;">
+        <p>
+            {{ user.username }}
+            <form action="{{ url_for('rgz.delete_user', user_id=user.id) }}" method="post">
+                <input type="submit" value="Удалить пользователя">
+            </form>
+        </p>
+    </div>
+    {% endfor %}
+        <h1 style="text-align: center;">Инициативы</h1>
+    {% for initiative in initiatives %}
+        <div style="border: 2px solid;border-radius: 8px; background-color: rgb(253, 253, 253); color: rgb(32, 19, 61);border-color: rgb(2, 108, 39);font-size: 17px;padding: 15px;height: min-content;width: 821px;margin: 10px auto;font-weight: bold;">
+        <p>
+            {{ initiative.title }}
+        </p>
+        <p>
+            {{ initiative.description }}
+        </p>
+        <p>
+            {{ initiative.date_created }}
+        </p>
+        <p>
+            {{ initiative.score }}
+        </p>
+        <form action="{{ url_for('rgz.admin_delete_initiative', initiative_id=initiative.id) }}" method="post">
+            <input type="submit" value="Удалить инициативу">
+        </form>
+        <br>
+        </div>
+    {% endfor %}
+    <div style="text-align: center;">
+        {% if initiatives.has_prev %}
+            <a href="{{ url_for('rgz.admin_users', page=initiatives.prev_num) }}">Зазад</a>
+        {% endif %}
+        <span>Страница {{ initiatives.page }} из {{ initiatives.pages }}</span>
+        {% if initiatives.has_next %}
+            <a href="{{ url_for('rgz.admin_users', page=initiatives.next_num) }}">Вперед</a>
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock %}

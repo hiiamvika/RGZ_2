@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инициативы</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+</head>
+<body>
+    <header>
+        <div>
+            <div style="display: flex;margin: 10px auto;width: 663px;height: 91px;">
+            <img src="https://abali.ru/wp-content/uploads/2014/08/gerb_novosibirskoj_oblasti.png" style="height: 93px;">
+            <div style="display: flow; padding: 10px;margin: 0px;text-align: center;">
+            <div style="font-size: 28px;">
+            Инициативы жителей города Новосибирска
+            </div> <br>
+            <div style="font-size: 18px;">
+            Вместе мы делаем изменения!
+            </div>
+            </div> 
+            </div>
+            </div>
+            <div style=" display: flex; margin: 10px auto;width: max-content;height: min-content;">
+            <a href="/home">Главная</a>
+            {% if not current_user.is_admin %}
+            <a href="/home/new_initiative">Подать инициативу</a>
+            {% endif %}
+            <a href="/home/register">Зарегестрироваться</a> <br>
+            <a href="/home/login">Войти</a> <br>
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('rgz.logout') }}">Выйти</a> <br>
+            {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+    
+    <footer>
+        Выполнила: Крышева В.Д.,ФБИ-12, 3 курс, 2023
+    </footer>
+</body>
+</html>

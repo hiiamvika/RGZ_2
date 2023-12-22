@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block main %}
+<form action="{{ url_for('rgz.new_initiative') }}" method="post" style="border: 2px solid;border-radius: 8px; background-color: rgb(253, 253, 253); color: rgb(32, 19, 61);border-color: rgb(0, 139, 21);font-size: 17px;padding: 15px;width: 446px;margin: 10px auto;font-weight: bold;text-align: center; display: grid;">
+    <label for="title">Заголовок:</label>
+    <input type="text" id="title" name="title"><br>
+    <label for="description">Основной текст:</label>
+    <textarea id="description" name="description" style="height: 254px;"></textarea><br>
+    <input type="submit" value="Подать инициативу">
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+</form>
+{% endblock %}
