@@ -1,5 +1,5 @@
 from Db import db
-import app
+from app import app
 from Db.models import User, Initiative, Vote
 def create_sample_initiatives():
     with app.app_context():  # Гарантирует, что вы находитесь в контексте приложения Flask
