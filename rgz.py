@@ -139,7 +139,7 @@ def new_initiative():
 def delete_initiative(initiative_id):
     initiative = Initiative.query.get_or_404(initiative_id)
     if initiative.user_id != current_user.id:
-        return "Access Denied", 403  # or some other error message or redirect
+        return "Access Denied", 403  
 
     db.session.delete(initiative)
     db.session.commit()
@@ -151,10 +151,9 @@ def delete_user(user_id):
     if not current_user.is_authenticated or not current_user.is_admin:
         return "Access Denied", 403
 
-    # Prevent admin from deleting themselves
+ 
     if current_user.id == user_id:
         error = "You cannot delete yourself."
-        # TODO render error at admin_users template
         return redirect(url_for('rgz.admin_users'))
 
     user_to_delete = User.query.get_or_404(user_id)
@@ -166,24 +165,24 @@ def delete_user(user_id):
 @rgz.route('/admin/delete_initiative/<int:initiative_id>', methods=['POST'])
 @login_required
 def admin_delete_initiative(initiative_id):
-    print("Current User:", current_user.username)  # Debug: Print the current user
-    print("Is Admin:", current_user.is_admin)  # Debug: Print whether the user is an admin
+    print("Current User:", current_user.username)  # Debug: вывести текущего пользователя
+    print("Is Admin:", current_user.is_admin)  # Debug: Print является ли пользователь администратором
 
     if not current_user.is_admin:
-        print("Access Denied: User is not an admin.")  # Debug: Print a message if access is denied
+        print("Access Denied: User is not an admin.")  # Debug: Print сообщение, если доступ запрещен
         return "Access Denied", 403
 
     initiative_to_delete = Initiative.query.get_or_404(initiative_id)
     db.session.delete(initiative_to_delete)
     db.session.commit()
-    return redirect(url_for('rgz.admin_users'))  # Redirect to an appropriate page
+    return redirect(url_for('rgz.admin_users'))  #Перенаправление на соответствующую страницу
 
 @rgz.route('/vote/up/<int:initiative_id>', methods=['POST'])
 @login_required
 def upvote(initiative_id):
     existing_vote = Vote.query.filter_by(user_id=current_user.id, initiative_id=initiative_id).first()
     if existing_vote:
-        if existing_vote.vote_type is True:  # Already upvoted
+        if existing_vote.vote_type is True:  # Уже проголосовали за
             return redirect(url_for('rgz.home'))
         existing_vote.vote_type = True
     else:
@@ -203,7 +202,7 @@ def upvote(initiative_id):
 def downvote(initiative_id):
     existing_vote = Vote.query.filter_by(user_id=current_user.id, initiative_id=initiative_id).first()
     if existing_vote:
-        if existing_vote.vote_type is False:  # Already downvoted
+        if existing_vote.vote_type is False:  # Уже проголосовали против
             return redirect(url_for('rgz.home'))
         existing_vote.vote_type = False
     else:

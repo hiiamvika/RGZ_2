@@ -20,8 +20,6 @@ db.init_app(app)
 login_manager = LoginManager()
 
 login_manager.login_view = "rgz.login"
-#NOTE fix
-#login_manager.login_view = "rgz.login"
 login_manager.init_app(app)
 
 @login_manager.user_loader
@@ -30,14 +28,14 @@ def load_users(user_id):
 
 
 # def create_sample_initiatives():
-#     with app.app_context():  # Ensures you're within the Flask app context
+#     with app.app_context():  # Гарантирует, что вы находитесь в контексте приложения Flask
 #         existing_count = Initiative.query.count()
 #         if existing_count < 100:
 #             for i in range(existing_count + 1, 101):  # Creates up to 100 initiatives
 #                 initiative = Initiative(
 #                     title=f"Initiative {i}",
 #                     description=f"Description for Initiative {i}",
-#                     user_id=2  # Assuming 1 is the ID of an existing user/admin
+#                     user_id=2  # Предполагается, что 2 — это идентификатор существующего пользователя.
 #                 )
 #                 db.session.add(initiative)
 #             db.session.commit()
