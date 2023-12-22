@@ -125,7 +125,7 @@ def new_initiative():
         title = request.form.get('title')
         description = request.form.get('description')
         if not title or not description:
-            error = 'Please fill in all fields'
+            error = 'Пожалуйста, заполните все поля!'
             return render_template("new_initiative.html", error=error)
 
         initiative = Initiative(title=title, description=description, user_id=current_user.id)
