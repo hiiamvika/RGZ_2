@@ -24,9 +24,6 @@
         <p>
             {{ initiative.date_created }}
         </p>
-        <p>
-            {{ initiative.score }}
-        </p>
         <form action="{{ url_for('rgz.admin_delete_initiative', initiative_id=initiative.id) }}" method="post">
             <input type="submit" value="Удалить инициативу">
         </form>

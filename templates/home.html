@@ -26,7 +26,6 @@
         </form>
         {% endif %}
         </div>
-        <p>Голоса: {{ initiative.score }}</p>
         {% if current_user.is_authenticated and initiative.user_id == current_user.id %}
             <form action="{{ url_for('rgz.delete_initiative', initiative_id=initiative.id) }}" method="post">
                 <input type="submit" value="Удалить свою инициативу">
