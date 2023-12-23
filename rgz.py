@@ -50,8 +50,8 @@ def admin_users(page=1):
     per_page = 20
     
     initiatives = Initiative.query.order_by(Initiative.date_created.desc()).paginate(page=page, per_page=per_page, error_out=False)
-    for user in users:
-        if user.has_initiative:
+
+    if users.has_initiative:
             errors = 'Вы не можете удалить пользователя, который имеет инициативу!'
 
     return render_template("admin_users.html", users=users, initiatives = initiatives, errors=errors)
