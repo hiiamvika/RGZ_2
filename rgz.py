@@ -151,13 +151,15 @@ def delete_initiative(initiative_id):
 def delete_user(user_id):
     if not current_user.is_authenticated or not current_user.is_admin:
         return "Access Denied", 403
-
-    if Initiative.query.filter_by(user_id=user.id).first():
-        return "You cannot delete a user with an initiative"
+    
+    initiatives = Initiative.query.filter_by(user_id=user_id).all()
+    if initiatives:
+        error = "You cannot delete a user with an initiative."
+        return redirect(url_for('rgz.admin_users'), error=error)
  
     if current_user.id == user_id:
         error = "You cannot delete yourself."
-        return redirect(url_for('rgz.admin_users'))
+        return redirect(url_for('rgz.admin_users'),error=error)
 
     user_to_delete = User.query.get_or_404(user_id)
     db.session.delete(user_to_delete)
