@@ -51,6 +51,9 @@ def admin_users(page=1):
     
     initiatives = Initiative.query.order_by(Initiative.date_created.desc()).paginate(page=page, per_page=per_page, error_out=False)
 
+    for user in users:
+        if user.has_initiative:
+            return "You cannot delete a user with an initiative"
     return render_template("admin_users.html", users=users, initiatives = initiatives, errors=errors)
 
 
