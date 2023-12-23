@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block main %}
 {% if current_user.is_authenticated and current_user.is_admin %}
+{% if error %}
+    <div>
+        {{ error }}
+    </div>
+{% endif %}
 <h1 style="text-align: center;">Пользователи:</h1>
     {% for user in users %}
     <div style="border: 2px solid;border-radius: 8px; background-color: rgb(253, 253, 253); color: rgb(32, 19, 61);border-color: rgb(2, 108, 39);font-size: 17px;padding: 15px;height: min-content;width: 821px;margin: 10px auto;font-weight: bold;">
