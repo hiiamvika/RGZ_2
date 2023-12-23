@@ -10,7 +10,6 @@
     {% for user in users %}
     <div style="border: 2px solid;border-radius: 8px; background-color: rgb(253, 253, 253); color: rgb(32, 19, 61);border-color: rgb(2, 108, 39);font-size: 17px;padding: 15px;height: min-content;width: 821px;margin: 10px auto;font-weight: bold;">
         <p>
-            {{ error }}
             {{ user.username }}
             <form action="{{ url_for('rgz.delete_user', user_id=user.id) }}" method="post">
                 <input type="submit" value="Удалить пользователя">
