@@ -51,9 +51,6 @@ def admin_users(page=1):
     
     initiatives = Initiative.query.order_by(Initiative.date_created.desc()).paginate(page=page, per_page=per_page, error_out=False)
 
-    for user in users:
-        if Initiative.query.filter_by(user_id=user.id).first():
-            return "You cannot delete a user with an initiative"
     return render_template("admin_users.html", users=users, initiatives = initiatives, errors=errors)
 
 
@@ -155,6 +152,8 @@ def delete_user(user_id):
     if not current_user.is_authenticated or not current_user.is_admin:
         return "Access Denied", 403
 
+    if Initiative.query.filter_by(user_id=user.id).first():
+        return "You cannot delete a user with an initiative"
  
     if current_user.id == user_id:
         error = "You cannot delete yourself."
